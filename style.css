@@ -1,0 +1,73 @@
+/* ----- style.css -----*/
+
+*{
+	margin: 0;
+	padding: 0;
+}
+ 
+body{
+	background-color : #01171b;
+}
+
+svg path{
+	fill: #00394f;
+	stroke: #eee;
+	stroke-width: .25;
+}
+
+svg path:hover{
+	fill: #006284;
+	transition: 0.6s;
+	cursor: pointer;
+}
+
+svg circle{
+	fill: #ed1c24!important;
+}
+
+/* Tooltip */
+body{
+  background-color: black;
+}
+
+p{
+  font-family: 'Kiwi Maru', serif;
+font-weight: 300;
+  text-size: 12px;
+  
+}
+
+
+.hide{
+  background-color: rgba(0,0,0,0.6);
+  border-radius: 5px;
+  text-aligh: center;
+  position: absolute;
+  margin: 0 auto;
+  padding: 10px 20px;
+  border: 1px solid #644666;
+  font-size: 12px;
+  display:none;
+  color:white;
+}
+
+.russia-txt{
+  top: 10%;
+  left: 45%;
+}
+
+.uk-txt{
+  top: 16%;
+  left: 35%;
+}
+
+.usa-txt{
+  top: 25%;
+  left: 9%;
+}
+
+.brazil-txt{
+  top: 50%;
+  left: 18%;
+}
+
