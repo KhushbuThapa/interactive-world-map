@@ -21,9 +21,9 @@ svg path:hover{
 	cursor: pointer;
 }
 
-svg circle{
-	fill: #ed1c24!important;
-}
+/*svg circle{*/
+/*	fill: #ed1c24!important;*/
+/*}*/
 
 /* Tooltip */
 body{
