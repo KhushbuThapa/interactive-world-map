@@ -1,76 +1,72 @@
-
-function showTooltip(evt, id) {
-  let tooltip = document.getElementById(id);
-  // tooltip.innerHTML = text;
-  tooltip.style.display = "block";
-  tooltip.style.left = evt.pageX + 10 + 'px';
-  tooltip.style.top = evt.pageY + 10 + 'px';
+function showTooltip(event,id) {
+    let tooltip = document.getElementById(id);
+    tooltip.style.display = "block";
+    tooltip.style.left = event.pageX + 10 + 'px';
+    tooltip.style.top = event.pageY + 10 + 'px';
 }
 
 function hideTooltip(id) {
-  var tooltip = document.getElementById(id);
-  tooltip.style.display = "none";
+    var tooltip = document.getElementById(id);
+    tooltip.style.display = "none";
 }
 
-// Create a dictionary with pointer for Nepal, Japan, Indonesia, California, USA, UK, Russia and Brazil
-
-countryMapping= {
-  // 'Nepal': {"cx": "", "cy": "", "r": ""},
-  // 'Japan': {"cx": "", "cy": "", "r": ""},
-  // 'Indonesia': {"cx": "", "cy": "", "r": ""},
-  // 'California': {"cx": "", "cy": "", "r": ""},
-  'USA': {"cx": "436", "cy": "248", "r": "17.5"},
-  'UK': {"cx": "970", "cy": "140", "r": "9.5"},
-  'Russia': {"cx": "1398", "cy": "100.2", "r": "17.5"},
-  'Brazil': {"cx": "700", "cy": "589.28", "r": "17.5"},
+let radius=10;
+let countryMapping = {
+    'Nepal': {"cx": "1450", "cy": "322", "r": radius},
+    'Japan': {"cx": "1726", "cy": "266", "r": radius},
+    'Indonesia': {"cx": "1635", "cy": "511", "r": radius},
+    'California': {"cx": "355", "cy": "268", "r": radius},
+    'usa': {"cx": "436", "cy": "248", "r": radius},
+    'uk': {"cx": "970", "cy": "140", "r": radius},
+    'russia': {"cx": "1398", "cy": "100.2", "r": radius},
+    'brazil': {"cx": "700", "cy": "589.28", "r": radius},
 }
-
-// <circle className="cls-2 marker-russia" cx="1398" cy="100.02 " r="17.5" onMouseMove="showTooltip(evt, 'russia-txt');"
-//         onMouseOut="hideTooltip('russia-txt');"/>
-// <circle className="cls-2 marker-uk" cx="970" cy="140" r="9.5" onMouseMove="showTooltip(evt, 'uk-txt');"
-//         onMouseOut="hideTooltip('uk-txt');"/>
-// <circle className="cls-2 marker-usa" cx="436" cy="248" r="17.5" onMouseMove="showTooltip(evt, 'usa-txt');"
-//         onMouseOut="hideTooltip('usa-txt');"/>
-// <circle className="cls-2 marker-brazil" cx="700" cy="589.28" r="17.5" onMouseMove="showTooltip(evt, 'brazil-txt');"
-//         onMouseOut="hideTooltip('brazil-txt');"/>
 
 // Create circle and respective div tag for mentioned countries
-document.addEventListener("DOMContentLoaded", function(event) {
-   for (const [key, value] of Object.entries(countryMapping)) {
-     let countryName= key;
+document.addEventListener("DOMContentLoaded", function (event) {
+    var svgns = "http://www.w3.org/2000/svg",
+        container = document.getElementById('world_map');
 
-      let div = document.createElement('circle');
-      // div.textContent = countryName;
-      div.setAttribute("class", "cls-2")
+    for (const [key, value] of Object.entries(countryMapping)) {
+        let countryName = key;
 
-      for(const[k,v] of Object.entries(value)) {
-          div.setAttribute(k, v);
-      }
-      div.style.css = 'fill:#ed1c24';
-      // document.styleSheets[0].cssText = "";
-      //  document.querySelectorAll('circle').sheet.cssRules[0].style.fill = 'red'
+        // Create circle tag for each of the pointer in map
+        let div = document.createElementNS(svgns, 'circle');
+        div.setAttributeNS(null, "class", "cls-2")
+        div.setAttributeNS(null, "id", countryName)
 
-      const currentDiv = document.getElementById('world_map');
-      currentDiv.appendChild(div, currentDiv);
+        for (const [k, v] of Object.entries(value)) {
+            div.setAttributeNS(null, k, v);
+        }
+        container.appendChild(div);
 
-  }
+        //Create hover divs
+        hoverDivs = document.createElement('div');
+        hoverDivs.setAttribute('class', 'hide');
+        hoverDivs.setAttribute('id', countryName+'-text');
+        header=document.createElement('h1');
+        header.textContent="Welcome to " + countryName +"!"
+
+        hoverDivs.appendChild(header)
+        document.body.appendChild(hoverDivs);
+
+    }
 
 });
 
-// function addElement () {
+document.addEventListener('mouseover', function (event){
+    id=event.target.id;
+    if(countryMapping[id]){
+        tooltipId=id+"-text";
+        showTooltip(event,tooltipId);
+    }
+});
 
+document.addEventListener('mouseout', function (event){
+    id=event.target.id;
+    if(countryMapping[id]){
+        tooltipId=id+"-text";
+        hideTooltip(tooltipId);
+    }
+});
 
-
-  // create a new div element
-  // const newDiv = document.createElement("div");
-  //
-  // // and give it some content
-  // const newContent = document.createTextNode("Hi there and greetings!");
-  //
-  // // add the text node to the newly created div
-  // newDiv.appendChild(newContent);
-
-  // add the newly created element and its content into the DOM
-  // const currentDiv = document.getElementById("marker-russia");
-  // document.body.insertBefore(newDiv, currentDiv);
-// }

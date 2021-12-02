@@ -21,9 +21,9 @@ svg path:hover{
 	cursor: pointer;
 }
 
-/*svg circle{*/
-/*	fill: #ed1c24!important;*/
-/*}*/
+svg circle{
+	fill: #ed1c24!important;
+}
 
 /* Tooltip */
 body{
@@ -51,23 +51,4 @@ font-weight: 300;
   color:white;
 }
 
-.russia-txt{
-  top: 10%;
-  left: 45%;
-}
-
-.uk-txt{
-  top: 16%;
-  left: 35%;
-}
-
-.usa-txt{
-  top: 25%;
-  left: 9%;
-}
-
-.brazil-txt{
-  top: 50%;
-  left: 18%;
-}
 
