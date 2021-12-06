@@ -1,4 +1,4 @@
-function showTooltip(event,id) {
+function showTooltip(event, id) {
     let tooltip = document.getElementById(id);
     tooltip.style.display = "block";
     tooltip.style.left = event.pageX + 10 + 'px';
@@ -10,7 +10,7 @@ function hideTooltip(id) {
     tooltip.style.display = "none";
 }
 
-let radius=10;
+let radius = 10;
 let countryMapping = {
     'Nepal': {"cx": "1450", "cy": "322", "r": radius},
     'Japan': {"cx": "1726", "cy": "266", "r": radius},
@@ -39,34 +39,44 @@ document.addEventListener("DOMContentLoaded", function (event) {
             div.setAttributeNS(null, k, v);
         }
         container.appendChild(div);
+    }
 
+});
+
+country = document.getElementById('world_map');
+document.addEventListener('mouseover', function (event) {
+
+    let countryCode = event.target.id;
+    path = document.getElementById(countryCode)
+    countryName=path.getAttribute('name');
+    tooltipId = countryCode + "-text";
+
+    if (countryCode !== 'world_map') {
         //Create hover divs
         hoverDivs = document.createElement('div');
         hoverDivs.setAttribute('class', 'hide');
-        hoverDivs.setAttribute('id', countryName+'-text');
-        header=document.createElement('h1');
-        header.textContent="Welcome to " + countryName +"!"
+        hoverDivs.setAttribute('id', countryCodite + '-text');
+        header = document.createElement('h1');
+        header.textContent = "Welcome to " + countryName + "!"
 
         hoverDivs.appendChild(header)
         document.body.appendChild(hoverDivs);
 
+        showTooltip(event, tooltipId);
     }
 
 });
 
-document.addEventListener('mouseover', function (event){
-    id=event.target.id;
-    if(countryMapping[id]){
-        tooltipId=id+"-text";
-        showTooltip(event,tooltipId);
-    }
-});
+document.addEventListener('mouseout', function (event) {
 
-document.addEventListener('mouseout', function (event){
-    id=event.target.id;
-    if(countryMapping[id]){
-        tooltipId=id+"-text";
+    let countryCode = event.target.id;
+    path = document.getElementById(countryCode)
+    countryName=path.getAttribute('name');
+
+    if(countryCode !== 'world_map'){
+        tooltipId = countryCode + "-text";
         hideTooltip(tooltipId);
     }
+
 });
 
